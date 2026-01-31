@@ -1,0 +1,79 @@
+<style>
+  .quiz-box { max-width: 520px; margin: 25px auto; padding: 20px; border: 2px solid #8ecaff; border-radius: 8px; background: #ffffff; font-family: Calibri, Arial, sans-serif; }
+  .quiz-question { color: #444444; font-size: 20px; margin-bottom: 15px; }
+  .quiz-option { color: #003366; font-size: 18px; margin: 8px 0; padding: 10px; border: 1px solid #003366; border-radius: 4px; cursor: pointer; }
+  .quiz-option:hover { background-color: #f0f8ff; }
+  .quiz-feedback { margin-top: 15px; font-size: 16px; font-family: Calibri, Arial, sans-serif; display: none; }
+  .feedback-correct { color: green; }
+  .feedback-incorrect { color: #6B1A19; }
+  .correct { border: 2px solid green; }
+  .incorrect { border: 2px solid #6B1A19; }
+</style>
+
+<style>
+  .quiz-box { max-width: 520px; margin: 25px auto; padding: 20px; border: 2px solid #8ecaff; border-radius: 8px; background: #ffffff; font-family: Calibri, Arial, sans-serif; }
+  .quiz-question { color: #444444; font-size: 20px; margin-bottom: 15px; }
+  .quiz-option { color: #003366; font-size: 18px; margin: 8px 0; padding: 10px; border: 1px solid #003366; border-radius: 4px; cursor: pointer; }
+  .quiz-option:hover { background-color: #f0f8ff; }
+  .quiz-feedback { margin-top: 15px; font-size: 16px; font-family: Calibri, Arial, sans-serif; display: none; }
+  .feedback-correct { color: green; }
+  .feedback-incorrect { color: #6B1A19; }
+  .correct { border: 2px solid green; }
+  .incorrect { border: 2px solid #6B1A19; }
+</style>
+
+<div class="quiz-box">
+<div class="quiz-question">What are the five stages of death according to Kubler-Ross?</div>
+
+<div class="quiz-option"
+     data-wrong="This sequence is not part of Kubler-Ross' model and omits key emotional processes such as bargaining and depression."
+     onclick="showFeedback(this, false, 'quiz1')">
+Shock, denial, anger, acceptance, resolution
+</div>
+
+<div class="quiz-option"
+     data-correct="Denial, anger, bargaining, depression, and acceptance"
+     onclick="showFeedback(this, true, 'quiz1')">
+Denial, anger, bargaining, depression, and acceptance
+</div>
+
+<div class="quiz-option"
+     data-wrong="Although these terms appear in the theory, the order is incorrect and does not reflect the accepted progression."
+     onclick="showFeedback(this, false, 'quiz1')">
+Bargaining, denial, acceptance, anger, and depression
+</div>
+
+<div class="quiz-option"
+     data-wrong="These terms are not part of the established Kubler-Ross stages."
+     onclick="showFeedback(this, false, 'quiz1')">
+Resistance, denial, grief, anger, and acceptance
+</div>
+
+<div id="quiz1-feedback"
+     class="quiz-feedback"
+     data-rationale="Kubler-Ross' theory outlines a psychological process individuals go through when facing terminal illness or significant grief; the stages represent a common, though non-linear, emotional journey.">
+</div>
+</div>
+
+<!-- TEST QUIZ 2 --><div class="quiz-box"><div class="quiz-question">When does La Belle Indifference most commonly occur?</div><div class="quiz-option" data-wrong="Patients with anxiety disorders typically experience heightened concern rather than indifference toward symptoms." onclick="showFeedback(this, false, 'quiz2')">In patients with anxiety disorders</div><div class="quiz-option" onclick="showFeedback(this, true, 'quiz2')">In patients with a conversion disorder</div><div class="quiz-option" data-wrong="Depressive disorders are characterized by distress, not paradoxical indifference to symptoms." onclick="showFeedback(this, false, 'quiz2')">In patients with depressive disorders</div><div class="quiz-option" data-wrong="Psychotic disorders involve impaired reality testing, not emotional indifference to physical symptoms." onclick="showFeedback(this, false, 'quiz2')">In patients with psychotic disorders</div><div id="quiz2-feedback" class="quiz-feedback"
+       data-rationale="La Belle Indifference is a paradoxical lack of concern about physical symptoms, most commonly seen in conversion disorder, where psychological stress manifests as physical symptoms."></div></div></div><!-- TEST QUIZ 3 --><div class="quiz-box"><div class="quiz-question">What is the most common complication of moderate anxiety?</div><div class="quiz-option" onclick="showFeedback(this, true, 'quiz3')">A decrease in the ability to perceive surroundings and concentrate</div><div class="quiz-option" data-wrong="Severe panic reactions are more characteristic of panic disorder rather than moderate anxiety." onclick="showFeedback(this, false, 'quiz3')">Complete loss of reality perception</div><div class="quiz-option" data-wrong="Motor paralysis is not a typical feature of anxiety disorders." onclick="showFeedback(this, false, 'quiz3')">Sudden paralysis of voluntary muscles</div><div class="quiz-option" data-wrong="Hallucinations are associated with psychotic disorders, not anxiety." onclick="showFeedback(this, false, 'quiz3')">Auditory hallucinations</div><div id="quiz3-feedback" class="quiz-feedback"
+       data-rationale="Moderate anxiety narrows focus and perception, often interfering with concentration due to the increased cognitive load on the individual."></div></div></div>
+<script>
+  function showFeedback(optionElement, isCorrect, quizId) {
+    const feedbackEl = document.getElementById(quizId + '-feedback');
+    const allOptions = optionElement.parentElement.querySelectorAll('.quiz-option');
+    allOptions.forEach(opt => opt.classList.remove('correct', 'incorrect'));
+    feedbackEl.classList.remove('feedback-correct', 'feedback-incorrect');
+    if (isCorrect) {
+      optionElement.classList.add('correct');
+      feedbackEl.classList.add('feedback-correct');
+      feedbackEl.textContent = feedbackEl.getAttribute('data-rationale');
+    } else {
+      optionElement.classList.add('incorrect');
+      feedbackEl.classList.add('feedback-incorrect');
+      const wrongText = optionElement.getAttribute('data-wrong') || 'This option is not correct.';
+      feedbackEl.textContent = 'Incorrect: ' + wrongText;
+    }
+    feedbackEl.style.display = 'block';
+  }
+</script>
